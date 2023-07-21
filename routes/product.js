@@ -75,17 +75,17 @@ router.post('/add', async function (req, res, next) {
 router.post('/edit', async function (req, res, next) {
   try {
     const { id, name, prices, idCate } = req.body;
-    var item = await modelProduct.findById(id);
-    if (item) {
-      item.name = name ? name : item.name;
-      item.prices = prices ? prices : item.prices;
-      item.idCate = idCate ? idCate : item.idCate;
-      await item.save();
-      res.json({ status: true, message: 'Sửa sản phẩm thành công' });
-    }
-    else {
-      res.json({ status: false, message: 'Không tìm thấy sản phẩm' });
-    }
+     var item = await modelProduct.findById(id);
+      if(item){
+        item.name = name ? name : item.name;
+        item.prices = prices ? prices : item.prices;
+        item.idCate = idCate ? idCate : item.idCate;
+        await item.save();
+        res.json({ status: true, message: 'Sửa sản phẩm thành công' });
+      }
+      else{
+        res.json({ status: false, message: 'Không tìm thấy sản phẩm' });
+      }
   }
   catch (error) {
     res.json({ status: false, message: "Sửa thất bại" });
