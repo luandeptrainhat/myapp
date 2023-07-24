@@ -35,6 +35,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //connect database
+//mongodb://127.0.0.1:27017/MyFpoly
 mongoose.connect('mongodb://127.0.0.1:27017/MyFpoly', {
   useNewUrlParser: true,
   useUnifiedTopology: true

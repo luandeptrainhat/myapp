@@ -42,6 +42,7 @@ router.post('/register', async function (req, res, next) {
 router.post('/login', async function (req, res, next) {
   try {
     const { username, password } = req.body;
+    
     const user = await modelUser.findOne({ username, password });
     if (!user) {
       res.status(401).json({ status: false, message: "Đăng nhập thất bại" });

@@ -14,7 +14,7 @@ router.get('/', async function (req, res, next) {
     try {
       const { id_user } = req.body;
       //tạo model
-      const userFind = { id_user };
+      // const userFind = { id_user };
       var query = {
         id_user: id_user,
       }
