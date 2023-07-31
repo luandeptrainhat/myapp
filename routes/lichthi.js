@@ -7,7 +7,7 @@ var modellichthi = require('../models/lichthi');
 router.get('/', async function (req, res, next) {
   // var id_user = req.query.id_user;
   var data = await modellichthi.find();
-  res.json(data);
+  res.json({data : data});
 });
 
 router.get('/user', async function (req, res, next) {

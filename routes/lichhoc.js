@@ -6,7 +6,7 @@ var modellichhoc = require('../models/lichhoc');
 
 router.get('/', async function (req, res, next) {
     var data = await modellichhoc.find();
-    res.json(data);
+    res.json({data : data});
   });
 
   router.get('/user', async function (req, res, next) {
