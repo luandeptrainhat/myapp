@@ -5,27 +5,29 @@ var modellichhoc = require('../models/lichhoc');
 
 
 router.get('/', async function (req, res, next) {
-  var data = await modellichhoc.find();
-  res.json(data);
-});
+    var data = await modellichhoc.find();
+    res.json({data : data});
+  });
 
-router.post('/user', async function (req, res, next) {
-  try {
-    const { id_user } = req.body;
-    //tạo model
-    // const userFind = { id_user };
-    var query = {
-      id_user: id_user,
+  router.post('/user', async function (req, res, next) {
+
+    try {
+      const { id_user } = req.body;
+      //tạo model
+      // const userFind = { id_user };
+      var query = {
+        id_user: id_user,
+      }
+      
+      var data= await modellichhoc.find(query);
+      res.json({status: true, message:"Lấy thành công",data:data}); 
     }
+    catch (error) {
+      res.json({ status: false, message: "Lấy thất bại" });
+    }
+  });
 
-    var data = await modellichhoc.find(query);
-    res.json({ status: true, message: "Lấy thành công", data: data });
-  }
-  catch (error) {
-    res.json({ status: false, message: "Lấy thất bại" });
-  }
-});
-// Tìm kiếm lịch học theo ngày cho một người dùng
+  // Tìm kiếm lịch học theo ngày cho một người dùng
 router.post('/user/find', async function (req, res, next) {
   try {
     const { id_user, ngayHoc } = req.body;
@@ -42,4 +44,5 @@ router.post('/user/find', async function (req, res, next) {
     res.json({ status: false, message: "Lấy thất bại" });
   }
 });
+
 module.exports = router;
