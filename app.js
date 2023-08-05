@@ -15,6 +15,9 @@ require('./models/lichhoc');
 require('./models/lichthi');
 require('./models/game');
 require('./models/played');
+require('./models/tin_tucap');
+require('./models/card');
+
 
 
 var indexRouter = require('./routes/index');
@@ -27,6 +30,12 @@ var lichhocRouter = require('./routes/lichhoc');
 var lichthiRouter = require('./routes/lichthi');
 var gameRouter = require('./routes/game');
 var playedRouter = require('./routes/played');
+var tin_tucapRouter = require('./routes/tin_tucap');
+var cardRouter = require('./routes/card');
+
+
+
+
 
 var app = express();
 
@@ -49,7 +58,7 @@ mongoose.connect('mongodb+srv://luanphung1357:zangun20@cluster0.bdmxvch.mongodb.
   .then(() => console.log('>>>>>>>>>> DB Connected!!!!!!'))
   .catch(err => console.log('>>>>>>>>> DB Error: ', err));
 
-  
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/san-pham', productRouter);
@@ -60,16 +69,18 @@ app.use('/lichhoc', lichhocRouter);
 app.use('/lichthi', lichthiRouter);
 app.use('/game', gameRouter);
 app.use('/played', playedRouter);
+app.use('/tin-tucap', tin_tucapRouter);
+app.use('/card', cardRouter);
 
 
 // luan
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
