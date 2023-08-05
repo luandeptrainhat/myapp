@@ -13,6 +13,9 @@ require('./models/user');
 require('./models/monhoc');
 require('./models/lichhoc');
 require('./models/lichthi');
+require('./models/card');
+require('./models/tin_tucap');
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -22,6 +25,9 @@ var userRouter = require('./routes/user');
 var monhocRouter = require('./routes/monhoc');
 var lichhocRouter = require('./routes/lichhoc');
 var lichthiRouter = require('./routes/lichthi');
+var cardRouter = require('./routes/card');
+var tin_tucapRouter = require('./routes/tin_tucap');
+
 var app = express();
 
 // view engine setup
@@ -36,15 +42,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //connect database
 //mongodb://127.0.0.1:27017/MyFpoly
-// mongoose.connect('mongodb://localhost/MyFpoly', {
-mongoose.connect('mongodb+srv://luanphung1357:zangun20@cluster0.bdmxvch.mongodb.net/MyFpoly', {
+// mongoose.connect('mongodb://localhost:27017/', {
+  mongoose.connect('mongodb+srv://luanphung1357:zangun20@cluster0.bdmxvch.mongodb.net/MyFpoly', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
   .then(() => console.log('>>>>>>>>>> DB Connected!!!!!!'))
   .catch(err => console.log('>>>>>>>>> DB Error: ', err));
+//.....
 
-  
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/san-pham', productRouter);
@@ -53,15 +59,19 @@ app.use('/user', userRouter);
 app.use('/monhoc', monhocRouter);
 app.use('/lichhoc', lichhocRouter);
 app.use('/lichthi', lichthiRouter);
+app.use('/card', cardRouter);
+app.use('/tin-tucap', tin_tucapRouter);
+
+
 
 // luan
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
