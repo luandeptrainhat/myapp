@@ -7,21 +7,21 @@ var modellichthi = require('../models/lichthi');
 router.get('/', async function (req, res, next) {
   // var id_user = req.query.id_user;
   var data = await modellichthi.find();
-  res.json(data);
+  res.json({ data: data });
 });
 
-router.get('/user', async function (req, res, next) {
+router.post('/user', async function (req, res, next) {
 
   try {
     const { id_user } = req.body;
     //tạo model
-    const userFind = { id_user };
+    //const userFind = { id_user };
     var query = {
       id_user: id_user,
     }
-    
-    var data= await modellichthi.find(query);
-    res.json({status: true, message:"Lấy thành công",data:data}); 
+
+    var data = await modellichthi.find(query);
+    res.json({ status: true, message: "Lấy thành công", data: data });
   }
   catch (error) {
     res.json({ status: false, message: "Lấy thất bại" });
@@ -31,5 +31,21 @@ router.get('/user', async function (req, res, next) {
 
 });
 
+// Tìm kiếm lịch thi theo ngày cho một người dùng
+router.post('/user/find', async function (req, res, next) {
+  try {
+    const { id_user, ngayThi } = req.body;
 
+    // Tạo truy vấn để tìm kiếm lịch học
+    const query = {
+      id_user: id_user,
+      ngayThi: ngayThi,
+    };
+
+    const data = await modellichthi.find(query);
+    res.json({ status: true, message: "Lấy thành công", data: data });
+  } catch (error) {
+    res.json({ status: false, message: "Lấy thất bại" });
+  }
+});
 module.exports = router;

@@ -5,7 +5,7 @@ var modelTintuc = require('../models/Tin_tuc');
 
 
 router.get('/', async function (req, res, next) {
-    var data = await modelTintuc.find();
-    res.json(data);
-  });
+  var data = await modelTintuc.find();
+  res.json({data:data});
+});
 module.exports = router;

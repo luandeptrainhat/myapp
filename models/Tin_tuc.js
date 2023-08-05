@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 const tin_tuc = new Schema({
-    id: { type: ObjectId }, 
+    id: { type: ObjectId },
     title: { type: String },
     content: { type: String },
     date: { type: String }

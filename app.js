@@ -13,6 +13,9 @@ require('./models/user');
 require('./models/monhoc');
 require('./models/lichhoc');
 require('./models/lichthi');
+require('./models/game');
+require('./models/played');
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -22,6 +25,9 @@ var userRouter = require('./routes/user');
 var monhocRouter = require('./routes/monhoc');
 var lichhocRouter = require('./routes/lichhoc');
 var lichthiRouter = require('./routes/lichthi');
+var gameRouter = require('./routes/game');
+var playedRouter = require('./routes/played');
+
 var app = express();
 
 // view engine setup
@@ -36,7 +42,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //connect database
 //mongodb://127.0.0.1:27017/MyFpoly
-mongoose.connect('mongodb://127.0.0.1:27017/MyFpoly', {
+mongoose.connect('mongodb+srv://luanphung1357:zangun20@cluster0.bdmxvch.mongodb.net/MyFpoly', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
@@ -52,6 +58,9 @@ app.use('/user', userRouter);
 app.use('/monhoc', monhocRouter);
 app.use('/lichhoc', lichhocRouter);
 app.use('/lichthi', lichthiRouter);
+app.use('/game', gameRouter);
+app.use('/played', playedRouter);
+
 
 // luan
 // catch 404 and forward to error handler
