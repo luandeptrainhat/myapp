@@ -17,6 +17,7 @@ require('./models/game');
 require('./models/played');
 require('./models/tin_tucap');
 require('./models/card');
+require('./models/game2');
 
 
 
@@ -32,6 +33,7 @@ var gameRouter = require('./routes/game');
 var playedRouter = require('./routes/played');
 var tin_tucapRouter = require('./routes/tin_tucap');
 var cardRouter = require('./routes/card');
+var game2Router = require('./routes/game2');
 
 
 
@@ -71,6 +73,7 @@ app.use('/game', gameRouter);
 app.use('/played', playedRouter);
 app.use('/tin-tucap', tin_tucapRouter);
 app.use('/card', cardRouter);
+app.use('/game2', game2Router);
 
 
 // luan

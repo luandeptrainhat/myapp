@@ -7,6 +7,26 @@ router.get('/', async function (req, res, next) {
     res.json(data);
 });
 
+// Route để lọc dữ liệu theo game_id
+router.get('/find-by-game-id/:gameId', async (req, res) => {
+  const gameId = req.params.gameId;
+
+  try {
+    // Sử dụng Mongoose để tìm dữ liệu dựa trên game_id
+    const data = await Played.find({ game_id: gameId });
+
+    if (!data || data.length === 0) {
+      return res.status(404).json({ message: 'Không tìm thấy dữ liệu cho game_id này' });
+    }
+
+    res.json(data);
+  } catch (error) {
+    console.error('Lỗi trong quá trình xử lý yêu cầu:', error);
+    res.status(500).json({ message: 'Lỗi trong quá trình xử lý yêu cầu' });
+  }
+});
+
+
 router.post('/lay-diem', async function (req, res, next) {
 
     try {
