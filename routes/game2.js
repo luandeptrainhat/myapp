@@ -75,16 +75,54 @@ router.delete('/:customId', async (req, res) => {
   }
 });
 
+// // Route để thêm câu hỏi vào game dựa trên customId
+// router.post('/addQuestion/:customId', async (req, res) => {
+//   try {
+//     const customId = req.params.customId; // Lấy customId từ URL
+
+//     // Tìm game dựa trên customId
+//     const game = await Game2.findOne({ customId });
+
+//     if (!game) {
+//       return res.status(404).json({ message: 'Không tìm thấy game với customId này' });
+//     }
+
+//     // Lấy thông tin câu hỏi từ request body
+//     const { cauhoi, a, b, c, d, dapan } = req.body;
+
+//     // Tạo câu hỏi mới
+//     const newQuestion = {
+//       cauhoi,
+//       a,
+//       b,
+//       c,
+//       d,
+//       dapan,
+//     };
+
+//     // Thêm câu hỏi vào game
+//     game.game.push(newQuestion);
+
+//     // Lưu lại game sau khi đã thêm câu hỏi
+//     const updatedGame = await game.save();
+
+//     res.status(200).json({ message: 'Thêm câu hỏi thành công', game: updatedGame });
+//   } catch (error) {
+//     console.error('Lỗi khi thêm câu hỏi:', error);
+//     res.status(500).json({ message: 'Đã xảy ra lỗi khi thêm câu hỏi' });
+//   }
+// });
 // Route để thêm câu hỏi vào game dựa trên customId
 router.post('/addQuestion/:customId', async (req, res) => {
   try {
     const customId = req.params.customId; // Lấy customId từ URL
 
     // Tìm game dựa trên customId
-    const game = await Game2.findOne({ customId });
+    let game = await Game2.findOne({ customId });
 
+    // Nếu không tìm thấy game, tạo mới
     if (!game) {
-      return res.status(404).json({ message: 'Không tìm thấy game với customId này' });
+      game = new Game2({ customId });
     }
 
     // Lấy thông tin câu hỏi từ request body
