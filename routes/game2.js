@@ -1,16 +1,18 @@
 const express = require('express');
 const router = express.Router();
 const Game2 = require('../models/game2'); // Đường dẫn đến mô hình game2
-
+const bcryptUtil = require('../utils/bcryptUtil');
 
 // Route để tạo một tài liệu mới
 router.post('/', async (req, res) => {
   try {
     const gameData = req.body; // Lấy dữ liệu từ request body
-    const game = new Game2(gameData);
+    let hashedPassword = req.body.password != null ? await bcryptUtil.ecryptPassword(req.body.password) : null;
+    const game = new Game2({...gameData, password : hashedPassword});
     const savedGame = await game.save();
     res.status(201).json(savedGame);
   } catch (error) {
+    console.log(error);
     res.status(500).json({ error: 'Lỗi trong quá trình tạo game' });
   }
 });
@@ -18,7 +20,7 @@ router.post('/', async (req, res) => {
 // Route để lấy tất cả các tài liệu game
 router.get('/getAll', async (req, res) => {
   try {
-    const games = await Game2.find();
+    const games = await Game2.find().sort({'createdAt': -1});
     res.json(games);
   } catch (error) {
     res.status(500).json({ error: 'Lỗi trong quá trình lấy danh sách games' });
