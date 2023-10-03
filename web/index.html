@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Form Câu hỏi</title>
+  
+  <script>
+    function clearForm() {
+      document.getElementById("question").value = "";
+      for (var i = 1; i <= 4; i++) {
+        document.getElementById("answer" + i).value = "";
+      }
+    }
+
+    function submitForm() {
+      var question = document.getElementById("question").value;
+      var answers = [];
+      for (var i = 1; i <= 4; i++) {
+        answers.push(document.getElementById("answer" + i).value);
+      }
+
+      // Do something with the question and answers
+      console.log("Question: " + question);
+      console.log("Answers: " + answers.join(", "));
+    }
+  </script>
+</head>
+<body>
+  <h2>Form Câu hỏi</h2>
+  <form>
+    <label for="question">Câu hỏi:</label><br>
+    <input type="text" id="question" name="question" required><br><br>
+
+    <label for="answer1">Câu trả lời 1:</label><br>
+    <input type="text" id="answer1" name="answer1" required><br><br>
+
+    <label for="answer2">Câu trả lời 2:</label><br>
+    <input type="text" id="answer2" name="answer2" required><br><br>
+
+    <label for="answer3">Câu trả lời 3:</label><br>
+    <input type="text" id="answer3" name="answer3" required><br><br>
+
+    <label for="answer4">Câu trả lời 4:</label><br>
+    <input type="text" id="answer4" name="answer4" required><br><br>
+
+    <button type="button" onclick="submitForm()">Xác nhận</button>
+    <button type="button" onclick="clearForm()">Clear dữ liệu</button>
+  </form>
+</body>
+</html>
